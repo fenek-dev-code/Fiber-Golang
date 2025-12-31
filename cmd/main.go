@@ -11,27 +11,22 @@ import (
 )
 
 func main() {
-	// Application entry point
-
-	// Load configuration and initialize logger
 	config.LoadEnv()
 	cfg := config.GetEnvConfig()
-
-	// Set up logger
 	logger := logger.NewLogger(cfg.LogConfig)
 
-	// Initialize Fiber app
 	app := fiber.New()
 
-	// Middleware
 	app.Use(fiberzerolog.New(fiberzerolog.Config{
 		Logger: logger,
 	}))
 	app.Use(recover.New())
+	app.Static("/public/", "./public")
 
-	// Register home handler
 	home.NewHomeHandler(app, logger)
 
-	// Start server
-	_ = app.Listen(":8081")
+	if err := app.Listen(":8081"); err != nil {
+		logger.Fatal().Err(err)
+		return
+	}
 }

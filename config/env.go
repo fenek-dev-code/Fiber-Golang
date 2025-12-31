@@ -7,7 +7,6 @@ import (
 )
 
 func LoadEnv(confPath ...string) {
-	// Load environment variables from .env file or other sources
 	if len(confPath) == 0 {
 		confPath = append(confPath, ".env")
 	}
@@ -18,7 +17,6 @@ func LoadEnv(confPath ...string) {
 		}
 		log.Printf("Loaded %s config file", path)
 	}
-
 }
 
 type LogConfig struct {

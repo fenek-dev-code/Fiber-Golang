@@ -7,6 +7,5 @@ import (
 )
 
 func Render(c *fiber.Ctx, component templ.Component) error {
-	// Placeholder for rendering logic
 	return adaptor.HTTPHandler(templ.Handler(component))(c)
 }

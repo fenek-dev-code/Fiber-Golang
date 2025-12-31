@@ -15,13 +15,16 @@ type homeHanlder struct {
 
 func NewHomeHandler(router fiber.Router, log *zerolog.Logger) {
 	h := &homeHanlder{router: router, log: log}
-	api := h.router.Group("/api")
-	api.Get("/", h.handleHome)
-	api.Get("/error", h.handleError)
+	h.router.Get("/", h.handleHome)
+	h.router.Get("/error", h.handleError)
 }
 
 func (h *homeHanlder) handleHome(c *fiber.Ctx) error {
+
 	component := views.Main()
+
+	c.Locals("email", "")
+
 	return tadapter.Render(c, component)
 }
 
