@@ -1,0 +1,66 @@
+package widgets
+
+import "go-fiber/views/components"
+
+templ VacancyForm() {
+    @vacancyFormCSS()
+    <div class="vacancy_form">
+        <div class="vacancy_form_title">
+            @components.Title("Опубликовать вакансию")
+            @components.SubTitle("Введите все необходимые данные для публикации")
+         </div>
+         <div id="vacancy-result"></div>
+        <form hx-post="/vacancy" hx-trigger="submit" hx-target="#vacancy-result">
+            <div class="vacancy_form__inputs">
+                @components.Input(components.InputProps{Placeholder: "Должность", Name: "role"})
+                @components.Input(components.InputProps{Placeholder: "Название компании", Name: "name"})
+                @components.Input(components.InputProps{Placeholder: "Сфера компании", Name: "type"})
+                @components.Input(components.InputProps{Placeholder: "Заробтная плата", Name: "salary"})
+                @components.Input(components.InputProps{Placeholder: "Расположение", Name: "location"})
+                @components.Input(components.InputProps{Placeholder: "Контактный Email", Name: "email"})
+            </div>
+            @components.SubmitBotton() {
+                <span>Опубликовать вакансию</span>
+            }
+        </form>
+    </div>
+     
+}
+
+templ vacancyFormCSS() {
+    <style>
+    .vacancy_form {
+        max-width: 890px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-items: center;
+    }
+    .vacancy_form__inputs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .vacancy_form_title {
+     /* Frame 498 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0px;
+gap: 40px;
+
+width: 703px;
+height: 88px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+    }
+    </style>
+}

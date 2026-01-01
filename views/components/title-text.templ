@@ -1,0 +1,56 @@
+package components
+
+
+templ Title(text string) {
+    @titleCSS()
+    <span class="title__text">
+    {text}
+    </span>
+}
+
+templ SubTitle(text string) {
+    @subTitleCSS()
+    <span class="sub_title_text">
+    {text}
+    </span>
+}
+
+templ titleCSS() {
+    <style>
+    .title__text {
+        width: 1010px;
+        height: 80px;
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 70px;
+        line-height: 80px;
+        text-align: center;
+        color: #FFFFFF;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+    }
+    </style>
+}
+
+templ subTitleCSS() {
+    <style>
+        .sub_title_text {
+            /* Простой поиск работы */
+            width: 1010px;
+            height: 25px;
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 25px;
+            text-align: center;
+            color: #BABABA;
+            flex: none;
+            order: 1;
+            align-self: stretch;
+            flex-grow: 0;
+        }
+    </style>
+}

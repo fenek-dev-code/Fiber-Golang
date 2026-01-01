@@ -2,7 +2,7 @@ package layout
 
 type LayoutProps struct{
     Title string
-   MetaDescription string
+    MetaDescription string
 }
 
 templ Layout(props LayoutProps) {
@@ -13,6 +13,7 @@ templ Layout(props LayoutProps) {
             <meta lang="ru">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta name="description" content={props.MetaDescription}> 
+            <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
             <title>{props.Title}</title>
             <link rel="stylesheet" href="/public/styles.css">
         </head>

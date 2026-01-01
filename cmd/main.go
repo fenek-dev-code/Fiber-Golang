@@ -3,6 +3,7 @@ package main
 import (
 	"go-fiber/config"
 	"go-fiber/internal/home"
+	"go-fiber/internal/vacancy"
 	"go-fiber/pkg/logger"
 
 	"github.com/gofiber/contrib/fiberzerolog"
@@ -24,6 +25,7 @@ func main() {
 	app.Static("/public/", "./public")
 
 	home.NewHomeHandler(app, logger)
+	vacancy.NewVacancyHanlder(app, logger)
 
 	if err := app.Listen(":8081"); err != nil {
 		logger.Fatal().Err(err)

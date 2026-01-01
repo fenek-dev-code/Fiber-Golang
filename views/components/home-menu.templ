@@ -1,0 +1,110 @@
+package components
+
+templ HomeMenu() {
+    @homeMenuCSS()
+    <div class="home__menu__block">
+        <div class="home__menu__input_text">
+            <div class="home__menu__title">
+                <div class="home__menu__text">
+                    @Title("Найди работу своей мечты")
+                    @SubTitle("Простой поиск работы !")
+                </div>
+            </div>
+            <div class="home__menu__search__block">
+                @HomeSearch()
+            </div>
+        </div>
+        <div class="home__menu__icons">
+        </div>
+    </div>
+}
+
+
+templ homeMenuCSS() {
+    <style>
+        .home__menu__block {
+            /* Text+inputs+ icons */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            gap: 80px;
+            width: 1010px;
+            height: 377px;
+            flex: none;
+            order: 1;
+            flex-grow: 0;
+        }
+
+        .home__menu__input_text {
+            /* Auto layout */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0px;
+            gap: 40px;
+            width: 1010px;
+            height: 237px;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+        }
+        .home__menu__icons {
+            /* Icons+ text */
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 0px;
+            gap: 40px;
+            width: 600px;
+            height: 60px;
+            flex: none;
+            order: 1;
+            flex-grow: 0;
+        }
+
+        .home__menu__title {
+            /* Text */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0px;
+            gap: 60px;
+            width: 1010px;
+            height: 117px;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+        }
+
+        .home__menu__text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0px;
+            gap: 12px;
+            width: 1010px;
+            height: 117px;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+        }
+
+        .home__menu__search__block {
+            /* Search */
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0px;
+            width: 575px;
+            height: 80px;
+            border-radius: 20px;
+            overflow: hidden;
+            flex: none;
+            order: 1;
+            flex-grow: 0;
+        }
+    </style>
+}

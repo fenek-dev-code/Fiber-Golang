@@ -1,0 +1,120 @@
+package components
+
+templ HomeSearch() {
+    @homeSearchCSS()
+    <div class="home__search">
+        <div class="home__search__text_block">
+            <input class="home__serch__text" placeholder="Название вакансии...">
+        </div>
+    </div>
+    <button class="home__searh__button">
+        <img src="/public/images/search.png" class="search_icon">
+        <span class="home__serach__button__text">
+            Найти
+        </span>
+    </button>
+}
+
+templ homeSearchCSS() {
+    <style>
+        .home__search {
+            /* Text+ icons+bg */
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 20px;
+            gap: 20px;
+            width: 435px;
+            height: 80px;
+            background: #FFFFFF;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+        }
+        .home__search__text_block {
+            /* Text+ icons */
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0px;
+            gap: 20px;
+            width: 305px;
+            height: 40px;
+            flex: none;
+            order: 0;
+            align-self: stretch;
+            flex-grow: 0;
+        }
+        .home__serch__text {
+            /* Text */
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 20px;
+            gap: 10px;
+            width: 205px;
+            height: 40px;
+            border-right: 1px solid rgba(255, 255, 255, 0.6);
+            flex: none;
+            order: 0;
+            align-self: stretch;
+            flex-grow: 0;
+            width: 250px;
+            height: 19px;
+            font-family: 'Figtree';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 19px;
+            color: rgba(0, 0, 0, 0.5);
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+            border: none;
+        }
+
+        .search_icon {
+            /* search */
+            width: 16px;
+            height: 16px;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+        }
+
+        .home__searh__button {
+            /* Button */
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 14px 28px;
+            gap: 10px;
+            width: 140px;
+            height: 80px;
+            background: #309689;
+            border-radius: 0px;
+            flex: none;
+            order: 1;
+            align-self: stretch;
+            flex-grow: 0;
+            border: none;
+        }
+
+        .home__serach__button__text {
+            /* Найти */
+            width: 58px;
+            height: 25px;
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 25px;
+            color: #FFFFFF;
+            flex: none;
+            order: 1;
+            flex-grow: 0;
+        }
+    </style>
+}

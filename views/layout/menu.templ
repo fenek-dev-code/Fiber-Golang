@@ -4,38 +4,41 @@ import "go-fiber/views/components"
 
 templ Menu() {
 	@MenuStyle()
-	<div class="menu">
-		<a href="/">
-			<img src="/public/images/logo.svg" />
-		</a>
-		<div class="menu__right">
-			{{ email := ctx.Value("email").(string) }}
-			if email == "" {
-				<a class="menu__right-link" href="/login">Войти</a>
-			} else {
-				<span class="menu__right-email">{email}</span>
-				<a class="menu__right-link"
-				 	hx-get="/api/logout"
-					hx-trigger="click"
-				>Выйти</a>
-			}
-			@components.LinkButton("/register") {
-				<span>Зарегистрироваться</span>
-			}
-		</div>
+	<a href="/">
+		<img src="/public/images/logo.svg" class="logo"/>
+	</a>
+	<div class="menu__right">
+		{{ email := ctx.Value("email").(string) }}
+		if email == "" {
+			<a class="menu__right-link" href="/login">Войти</a>
+		} else {
+			<span class="menu__right-email">{email}</span>
+			<a class="menu__right-link"
+				hx-get="/api/logout"
+				hx-trigger="click"
+			>Выйти</a>
+		}
+		@components.LinkButton("/register") {
+			<span>Зарегистрироваться</span>
+		}
 	</div>
 }
 
 templ MenuStyle() {
 	<style>
-		.menu {
+		.logo {
+			/* Logo */
 			display: flex;
-			justify-content: space-between;
-			padding: 20px 0;
-			max-width: 1290px;
+			flex-direction: row;
 			align-items: center;
-			width: 100%;
-			margin-bottom: 100px;
+			padding: 0px;
+			gap: 10px;
+			margin: 0 auto;
+			width: 156px;
+			height: 28px;
+			flex: none;
+			order: 0;
+			flex-grow: 0;
 		}
 	
 		.menu__right {
