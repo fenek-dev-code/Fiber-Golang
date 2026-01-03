@@ -25,7 +25,7 @@ func (h *homeHanlder) handleHome(c *fiber.Ctx) error {
 
 	c.Locals("email", "")
 
-	return tadapter.Render(c, component)
+	return tadapter.Render(c, component, fiber.StatusOK)
 }
 
 func (h *homeHanlder) handleError(c *fiber.Ctx) error {

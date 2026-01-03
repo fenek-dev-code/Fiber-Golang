@@ -13,6 +13,7 @@ func main() {
 	logger := logger.NewLogger(cfg.LogConfig)
 
 	db := database.NewDbPool(cfg.DatabaseURL)
+	logger.Info().Msg("Database connection established")
 	defer database.CloseDB(db)
 
 	app := app.App(app.AppDeps{
