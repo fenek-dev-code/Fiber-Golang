@@ -1,14 +1,10 @@
 package main
 
 import (
+	"go-fiber/app"
 	"go-fiber/config"
-	"go-fiber/internal/home"
-	"go-fiber/internal/vacancy"
+	"go-fiber/pkg/database"
 	"go-fiber/pkg/logger"
-
-	"github.com/gofiber/contrib/fiberzerolog"
-	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/recover"
 )
 
 func main() {
@@ -16,16 +12,15 @@ func main() {
 	cfg := config.GetEnvConfig()
 	logger := logger.NewLogger(cfg.LogConfig)
 
-	app := fiber.New()
+	db := database.NewDbPool(cfg.DatabaseURL)
+	defer database.CloseDB(db)
 
-	app.Use(fiberzerolog.New(fiberzerolog.Config{
-		Logger: logger,
-	}))
-	app.Use(recover.New())
-	app.Static("/public/", "./public")
-
-	home.NewHomeHandler(app, logger)
-	vacancy.NewVacancyHanlder(app, logger)
+	app := app.App(app.AppDeps{
+		Logger:    logger,
+		EnvConfig: cfg,
+		Pool:      db,
+	})
+	defer app.Shutdown()
 
 	if err := app.Listen(":8081"); err != nil {
 		logger.Fatal().Err(err)

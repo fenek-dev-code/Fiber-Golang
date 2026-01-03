@@ -10,7 +10,7 @@ templ VacancyForm() {
             @components.SubTitle("Введите все необходимые данные для публикации")
          </div>
          <div id="vacancy-result"></div>
-        <form hx-post="/vacancy" hx-trigger="submit" hx-target="#vacancy-result">
+        <form hx-post="/vacancy" hx-trigger="submit" hx-target="#vacancy-result" hx-swap="innerHTML">
             <div class="vacancy_form__inputs">
                 @components.Input(components.InputProps{Placeholder: "Должность", Name: "role"})
                 @components.Input(components.InputProps{Placeholder: "Название компании", Name: "name"})
@@ -20,7 +20,8 @@ templ VacancyForm() {
                 @components.Input(components.InputProps{Placeholder: "Контактный Email", Name: "email"})
             </div>
             @components.SubmitBotton() {
-                <span>Опубликовать вакансию</span>
+                <div class="loader"></div>
+                <span class="isLoading">Опубликовать вакансию</span>
             }
         </form>
     </div>
@@ -62,5 +63,34 @@ order: 0;
 flex-grow: 0;
 
     }
+
+     /* HTML: <div class="loader"></div> */
+    .loader {
+        display: none;
+        width: fit-content;
+        font-size: 40px;
+        font-family: system-ui,sans-serif;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #0000;
+        -webkit-text-stroke: 1px #000;
+        background: 
+            linear-gradient(-60deg,#0000 45%,#000 0 55%,#0000 0) 
+            0/300% 100% no-repeat text;
+        animation: l3 2s linear infinite;
+        }
+        .loader:before {
+        content: "Loading";
+        }
+        @keyframes l3 {
+        0%{background-position: 100%}
+    }
+    .htmx-request .loader{
+        display: block;
+    }
+    .htmx-request .isLoading{
+        display: none;
+    }
+
     </style>
 }

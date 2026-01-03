@@ -3,3 +3,4 @@
 *_templ.go
 **/*_templ.go
 .air.toml
+/postgres

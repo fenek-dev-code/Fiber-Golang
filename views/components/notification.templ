@@ -1,11 +1,22 @@
 package components
 
+type NotificationStatus string
 
-templ Notification(msg string) {
+const (
+    NotificationSuccess NotificationStatus = "success"
+    NotificationFail NotificationStatus = "fail"
+)
+
+templ Notification(msg string, status NotificationStatus) {
     @notificationCSS()
-    <div class="notification notification_success">
+    
+    <div class={"notification", 
+    templ.KV("notification_success",  status == NotificationSuccess),
+    templ.KV("notification_fail",  status == NotificationFail)
+    }>
+    <div class="loader"></div> 
     {msg}
-    </div>
+    </div> 
 }
 
 templ notificationCSS() {
@@ -19,5 +30,41 @@ templ notificationCSS() {
     .notification_success {
         background-color: #309689;
     }
+
+    .notification_fail {
+        background-color: #b43133; 
+    }
+
+    .htmx-swapping .notification {
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+
+    /* HTML: <div class="loader"></div> */
+    .loader {
+        display: none;
+        width: fit-content;
+        font-size: 40px;
+        font-family: system-ui,sans-serif;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #0000;
+        -webkit-text-stroke: 1px #000;
+        background: 
+            linear-gradient(-60deg,#0000 45%,#000 0 55%,#0000 0) 
+            0/300% 100% no-repeat text;
+        animation: l3 2s linear infinite;
+        }
+        .loader:before {
+        content: "Loading";
+        }
+        @keyframes l3 {
+        0%{background-position: 100%}
+    }
+    .htmx-request .loader {
+        display: block;
+    }
+
+
     </style>
 }

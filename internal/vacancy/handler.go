@@ -3,6 +3,7 @@ package vacancy
 import (
 	"go-fiber/pkg/tadapter"
 	"go-fiber/views/components"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/rs/zerolog"
@@ -22,8 +23,13 @@ func NewVacancyHanlder(router fiber.Router, log *zerolog.Logger) {
 }
 
 func (h *VacnacyHanlder) create(c *fiber.Ctx) error {
-	email := c.FormValue("email")
-	h.log.Info().Msg(email)
-	comp := components.Notification("Вакансия созданна!")
+	form := CreateVacancyForm(c)
+	formsErrs := form.IsValid()
+	time.Sleep(2 * time.Second)
+	if formsErrs.HasAny() {
+		comp := components.Notification(formsErrs.Error(), components.NotificationFail)
+		return tadapter.Render(c, comp)
+	}
+	comp := components.Notification("Вакансия созданна!", components.NotificationSuccess)
 	return tadapter.Render(c, comp)
 }
