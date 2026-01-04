@@ -1,0 +1,96 @@
+package components
+
+import "time"
+
+type PropsVacancyCard struct {
+	Company     string
+	Role        string
+	CompanyType string
+	Salary      string
+	Location    string
+	CreatedAt   time.Time
+}
+
+templ VacancyCard(props PropsVacancyCard) {
+	@vacancyCardCSS()
+	<div class="vacancy_card">
+		<div>
+			<span class="vacancy_card__created-at">{ props.CreatedAt.Format("2006.01.02 15:04") }</span>
+		</div>
+		<div class="vacancy_card__title">
+			<div class="vacancy_card__title__role">{ props.Role }</div>
+			<div class="vacancy_card__title__company">{ props.Company }</div>
+		</div>
+		<div class="vacancy_card__footer">
+			<div class="vacancy_card__stats">
+				<div class="vacancy_card__stat">
+					<img src="/public/icons/briefcase.svg" alt="Company Type"/>
+					<span>{ props.CompanyType } </span>
+				</div>
+				<div class="vacancy_card__stat">
+					<img src="/public/icons/pocket.svg" alt="Salary"/>
+					<span>{ props.Salary } руб.  </span>
+				</div>
+				<div class="vacancy_card__stat">
+					<img src="/public/icons/map-pin.svg" alt="Location"/>
+					<span>{ props.Location } </span>
+				</div>
+			</div>
+			@LinkButton("") {
+				<h3>Откликнуться</h3>
+			}
+		</div>
+	</div>
+}
+
+templ vacancyCardCSS() {
+	<style>
+	.vacancy_card {
+	    display: flex;
+		flex-direction: column;
+		gap: 24px;
+		border-radius: 20px;
+		padding: 20px;
+		background-color: var(--color-white);
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
+	.vacancy_card__created-at {
+		border-radius: 8px;
+		padding: 8px;
+		background-color: rgba(255, 255, 255, 0.1);
+		color: var(--color-primary);
+	}
+	.vacancy_card__title {
+		display: flex;
+		gap:10px;
+		flex-direction: column;
+	}
+	.vacancy_card__title__role {
+		font-size: 28px;
+		font-weight: 600;
+		color: var(--color-black);
+	}
+	.vacancy_card__title__company {
+    	font-size: 16px;
+    	font-weight: 400;
+    	color: var(--color-black);
+	}
+
+	.vacancy_card__footer {
+		display: flex;
+		gap: 10px;
+		align-items: flex-end;
+		justify-content: space-between;
+	}
+	.vacancy_card__stat {
+		display: flex;
+		gap: 12px;
+		align-items: center;
+	}
+
+	.vacancy_card__stats {
+		display: flex;
+		gap: 24px;
+	}
+	</style>
+}
