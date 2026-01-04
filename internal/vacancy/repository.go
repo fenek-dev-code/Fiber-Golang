@@ -33,7 +33,7 @@ func (r *Repository) CreateVacancy(form *VacancyCreateForm) error {
 }
 
 func (r *Repository) GetAll() ([]Vacancy, error) {
-	query := `SELECT * FROM vacansies;`
+	query := `SELECT * FROM vacancies;`
 	row, err := r.pool.Query(context.Background(), query)
 	if err != nil {
 		r.log.Err(err).Msg("Ошибка при получения вакансий с Базы vacancy.repository.GetAll()")
