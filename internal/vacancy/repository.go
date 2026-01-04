@@ -31,3 +31,28 @@ func (r *Repository) CreateVacancy(form *VacancyCreateForm) error {
 	_, err := r.pool.Exec(context.Background(), query, args)
 	return err
 }
+
+func (r *Repository) GetAll() ([]Vacancy, error) {
+	query := `SELECT * FROM vacansies;`
+	row, err := r.pool.Query(context.Background(), query)
+	if err != nil {
+		r.log.Err(err).Msg("Ошибка при получения вакансий с Базы vacancy.repository.GetAll()")
+		return nil, err
+	}
+	defer row.Close()
+	// Этот метод работает только со Struct Tags `db:"id"`
+	return pgx.CollectRows(row, pgx.RowToStructByNameLax[Vacancy])
+
+	// Старыый метод
+	// var vacancies []Vacancy
+	// for row.Next() {
+	// 	var vacancy Vacancy
+	// 	err := row.Scan(&vacancy.Id, &vacancy.Email, &vacancy.Name, &vacancy.Role, &vacancy.Type, &vacancy.Salary, &vacancy.Location, &vacancy.CreatedAt, &vacancy.UpdatedAt)
+	// 	if err != nil {
+	// 		r.log.Err(err).Msg("Ошибка при сканировании вакансии из Базы vacancy.repository.GetAll()")
+	// 		return nil, err
+	// 	}
+	// 	vacancies = append(vacancies, vacancy)
+	// }
+	// return vacancies, nil
+}

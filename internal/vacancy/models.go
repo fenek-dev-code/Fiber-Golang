@@ -2,6 +2,7 @@ package vacancy
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/gobuffalo/validate"
 	"github.com/gobuffalo/validate/validators"
@@ -14,6 +15,18 @@ type VacancyCreateForm struct {
 	Type     string `form:"type"`
 	Salary   int    `form:"salary"`
 	Location string `form:"location"`
+}
+
+type Vacancy struct {
+	Id        int       `db:"id"`
+	Email     string    `db:"email"`
+	Name      string    `db:"name"`
+	Role      string    `db:"role"`
+	Type      string    `db:"type"`
+	Salary    int       `db:"salary"`
+	Location  string    `db:"location"`
+	CreatedAt time.Time `db:"created_at"`
+	UpdatedAt time.Time `db:"updated_at"`
 }
 
 type FormParser interface {
