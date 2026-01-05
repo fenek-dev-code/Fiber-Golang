@@ -3,51 +3,55 @@ package layout
 import "go-fiber/views/components"
 
 templ HeaderStyle() {
-    <style>
+	<style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         .hero {
             width: 100%;
             min-height: 600px;
-            background: 
-                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+            background:
+                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
                 url('/public/images/background_hero.png') center/cover no-repeat;
             display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
         }
-        
+
         .hero-container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1600px;
             padding: 0 20px;
-            margin: 0 auto;
+            margin-left: var(--margin-default);
+            margin-right: var(--margin-default);
+            justify-content: center;
         }
-        
+
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 0;
             width: 100%;
+            margin-left: var(--margin-default);
+            margin-right: var(--margin-default);
         }
     </style>
 }
 
 templ Header() {
-    @HeaderStyle()
-    <div class="hero">
-        <div class="hero-container">
-            <div class="header">
-                @Menu()
-                { children... }
-            </div>
-            @components.HomeMenu()
-        </div>
-    </div>
+	@HeaderStyle()
+	<div class="hero">
+		<div class="hero-container">
+			<div class="header">
+				@Menu()
+				{ children... }
+			</div>
+			@components.HomeMenu()
+		</div>
+	</div>
 }

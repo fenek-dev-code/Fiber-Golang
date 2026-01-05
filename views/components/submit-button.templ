@@ -3,18 +3,18 @@ package components
 templ SubmitBotton() {
 	@submitButtonCSS()
 	<button class="submit__button" type="submit">
-    { children... }
-    </button>
+		{ children... }
+	</button>
 }
 
 templ submitButtonCSS() {
 	<style>
 		.submit__button {
-			padding: 15px 20px;
+			padding: 25px 30px;
 			background-color: var(--color-primary);
 			color: var(--color-white);
 			text-decoration: none;
-			border-radius: 8px;
+			border-radius: 20px;
             border-color: var(--color-primary-hover);
             border: none;
 		}

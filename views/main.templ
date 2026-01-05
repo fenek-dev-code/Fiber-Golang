@@ -1,12 +1,12 @@
 package views
 
 import (
-	"go-fiber/views/components"
+	"go-fiber/internal/vacancy"
 	"go-fiber/views/layout"
-	"time"
+	"go-fiber/views/widgets"
 )
 
-templ Main() {
+templ Main(vacancies []vacancy.Vacancy) {
 	@layout.Layout(layout.LayoutProps{
 		Title:           "Найди работу мечты",
 		MetaDescription: "Сайт по поиску работы мечты",
@@ -14,44 +14,11 @@ templ Main() {
 		<main>
 			@mainCSS()
 			@layout.Header()
-			<div class="vacancy_block">
-				<div class="vacancy_block__header">
-					<h1>Последние вакансии</h1>
-					<h3>Найдите подходящую вакансию за пару минут!</h3>
-				</div>
-				@components.VacancyCard(components.PropsVacancyCard{
-					Location:    "Онлайн",
-					Company:     "PurpleSchool",
-					Salary:      "100 000 - 150 000",
-					CompanyType: "IT",
-					CreatedAt:   time.Now(),
-					Role:        "Go Backend Developer",
-				})
-			</div>
+			@widgets.VacancyWidget(vacancies)
+			@widgets.VacancyForm()
 		</main>
 	}
 }
 
 templ mainCSS() {
-	<style>
-	.vacancy_block {
-	    display: flex;
-					padding-top: 20px;
-					padding-bottom: 20px;
-		padding-left: 120px;
-		padding-right: 120px;
-		gap: 20px;
-		flex-direction: column;
-		background: rgba(48, 150, 137, 0.1);
-	}
-
-	.vacancy_block__header {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-		gap: 10px;
-		padding: 20px;
-	}
-
-	</style>
 }

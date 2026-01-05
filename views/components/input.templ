@@ -1,26 +1,28 @@
 package components
 
 type InputProps struct {
-    Placeholder string
-    Name string
+	Placeholder string
+	Name        string
 }
 
 templ Input(props InputProps) {
-      @inputCSS()
-      <input placeholder={props.Placeholder} name={props.Name} class="input__class"/>
+	@inputCSS()
+	<input placeholder={ props.Placeholder } name={ props.Name } class="input__class"/>
 }
 
 templ inputCSS() {
-    <style>
+	<style>
     .input__class {
         height: 80px;
         padding: 20px;
         border-radius: 20px;
         background-color: var(--color-white);
         border: none;
+        width: 100%;
+        font-size: 18px;
     }
     .input__class:hover {
         color:  var(--color-gray);
-    } 
+    }
     </style>
 }
