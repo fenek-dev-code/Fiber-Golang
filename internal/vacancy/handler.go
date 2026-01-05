@@ -27,6 +27,18 @@ func NewVacancyHanlder(deps Dependencies) {
 		repo:   deps.Repository,
 	}
 	r.router.Post("/vacancy", r.create)
+	r.router.Get("/api/vacancy", r.getAll)
+}
+
+func (h *VacnacyHanlder) getAll(c *fiber.Ctx) error {
+	vacancies, err := h.repo.GetAll()
+	if err != nil {
+		h.log.Error().Err(err).Msg("failed to get all vacancies")
+		return fiber.ErrInternalServerError
+	}
+
+	c.Status(fiber.StatusOK)
+	return c.JSON(vacancies)
 }
 
 func (h *VacnacyHanlder) create(c *fiber.Ctx) error {

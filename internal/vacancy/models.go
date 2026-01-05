@@ -26,7 +26,6 @@ type Vacancy struct {
 	Salary    int       `db:"salary"`
 	Location  string    `db:"location"`
 	CreatedAt time.Time `db:"created_at"`
-	UpdatedAt time.Time `db:"updated_at"`
 }
 
 type FormParser interface {

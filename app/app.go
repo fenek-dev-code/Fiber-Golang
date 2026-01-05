@@ -28,14 +28,14 @@ func App(deps AppDeps) *fiber.App {
 	app.Use(recover.New())
 	app.Static("/public/", "./public")
 
-	vacansyRepo := vacancy.NewRepository(deps.Logger, deps.Pool)
+	vacancyRepo := vacancy.NewRepository(deps.Logger, deps.Pool)
 
 	// Init Routes
-	home.NewHomeHandler(app, deps.Logger)
+	home.NewHomeHandler(app, deps.Logger, vacancyRepo)
 	vacancy.NewVacancyHanlder(vacancy.Dependencies{
 		Router:     app,
 		Logger:     deps.Logger,
-		Repository: vacansyRepo,
+		Repository: vacancyRepo,
 	})
 	return app
 }

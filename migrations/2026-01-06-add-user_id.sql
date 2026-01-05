@@ -1,0 +1,1 @@
+ALTER TABLE vacancies ADD COLUMN user_id INT NOT NULL DEFAULT 1;
