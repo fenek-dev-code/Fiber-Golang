@@ -1,6 +1,7 @@
 package components
 
 import "time"
+import "github.com/rvflash/elapsed"
 
 type PropsVacancyCard struct {
 	Company     string
@@ -15,7 +16,8 @@ templ VacancyCard(props PropsVacancyCard) {
 	@vacancyCardCSS()
 	<div class="vacancy_card">
 		<div>
-			<span class="vacancy_card__created-at">{ props.CreatedAt.Format("2006.01.02 15:04") }</span>
+			{{ date := elapsed.LocalTime(props.CreatedAt, "ru") }}
+			<span class="vacancy_card__created-at">{ date }</span>
 		</div>
 		<div class="vacancy_card__title">
 			<div class="vacancy_card__title__role">{ props.Role }</div>
@@ -48,6 +50,7 @@ templ vacancyCardCSS() {
 	.vacancy_card {
 	    display: flex;
 		flex-direction: column;
+		width: 100%;
 		gap: 24px;
 		border-radius: 20px;
 		padding: 20px;

@@ -1,32 +1,27 @@
 package components
 
-
-templ Title(text string) {
-    @titleCSS()
-    <span class="title__text">
-    {text}
-    </span>
+templ Title(text string, color string) {
+	@titleCSS()
+	<span class="title__text" style={ "color: " + color }>
+		{ text }
+	</span>
 }
 
-templ SubTitle(text string) {
-    @subTitleCSS()
-    <span class="sub_title_text">
-    {text}
-    </span>
+templ SubTitle(text string, color string) {
+	@subTitleCSS()
+	<span class="sub_title_text" style={ "color: " + color }>
+		{ text }
+	</span>
 }
 
 templ titleCSS() {
-    <style>
+	<style>
     .title__text {
-        width: 1010px;
-        height: 80px;
-        font-family: 'Open Sans';
         font-style: normal;
         font-weight: 700;
-        font-size: 70px;
+        font-size: 64px;
         line-height: 80px;
         text-align: center;
-        color: #FFFFFF;
         flex: none;
         order: 0;
         flex-grow: 0;
@@ -35,22 +30,13 @@ templ titleCSS() {
 }
 
 templ subTitleCSS() {
-    <style>
+	<style>
         .sub_title_text {
             /* Простой поиск работы */
-            width: 1010px;
-            height: 25px;
-            font-family: 'Open Sans';
             font-style: normal;
             font-weight: 400;
             font-size: 18px;
             line-height: 25px;
-            text-align: center;
-            color: #BABABA;
-            flex: none;
-            order: 1;
-            align-self: stretch;
-            flex-grow: 0;
         }
     </style>
 }
