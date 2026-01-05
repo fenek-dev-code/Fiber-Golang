@@ -4,3 +4,6 @@
 **/*_templ.go
 .air.toml
 /postgres
+.DS_Store
+*.DS_Store
+**/.DS_Store
