@@ -1,0 +1,58 @@
+package widgets
+
+import (
+	"fmt"
+	"go-fiber/internal/vacancy"
+	"go-fiber/views/components"
+)
+
+templ VacancyWidget(vacancies []vacancy.Vacancy) {
+	@vacancyWidgetCSS()
+	<div class="vacancy_block__content">
+		<div class="vacancy_block">
+			<div class="vacancy_block__header">
+				@components.Title("Последние вакансии", "black")
+				@components.SubTitle("Найдите подходящую вакансию за пару минут!", "black")
+			</div>
+			for _, vacancy := range vacancies {
+				{{ salary := fmt.Sprintf("%d руб.", vacancy.Salary) }}
+				@components.VacancyCard(components.PropsVacancyCard{
+					Location:    vacancy.Location,
+					Company:     vacancy.Name,
+					Salary:      salary,
+					CompanyType: vacancy.Type,
+					CreatedAt:   vacancy.CreatedAt,
+					Role:        vacancy.Role,
+				})
+			}
+		</div>
+	</div>
+}
+
+templ vacancyWidgetCSS() {
+	<style>
+	.vacancy_block__content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+	}
+
+	.vacancy_block {
+	    display: flex;
+		padding: 20px;
+		width: 100%;
+		gap: 20px;
+		flex-direction: column;
+	}
+
+	.vacancy_block__header {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 10px;
+		padding: 20px;
+	}
+
+	</style>
+}
