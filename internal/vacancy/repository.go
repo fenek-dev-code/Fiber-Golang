@@ -17,6 +17,13 @@ func NewRepository(log *zerolog.Logger, pool *pgxpool.Pool) *Repository {
 	return &Repository{log: log, pool: pool}
 }
 
+func (r *Repository) Count() (int, error) {
+	query := `SELECT COUNT(*) FROM vacancies`
+	var count int
+	err := r.pool.QueryRow(context.Background(), query).Scan(&count)
+	return count, err
+}
+
 func (r *Repository) CreateVacancy(form *VacancyCreateForm) error {
 	query := `INSERT INTO vacancies (email, name, role, type, salary, location)
 	VALUES (@email, @name, @role, @type, @salary, @location)`
@@ -32,9 +39,13 @@ func (r *Repository) CreateVacancy(form *VacancyCreateForm) error {
 	return err
 }
 
-func (r *Repository) GetAll() ([]Vacancy, error) {
-	query := `SELECT * FROM vacancies;`
-	row, err := r.pool.Query(context.Background(), query)
+func (r *Repository) GetAll(limit, offset int) ([]Vacancy, error) {
+	query := `SELECT * FROM vacancies ORDER BY created_at DESC LIMIT @limit OFFSET @offset;`
+	args := pgx.NamedArgs{
+		"limit":  limit,
+		"offset": offset,
+	}
+	row, err := r.pool.Query(context.Background(), query, args)
 	if err != nil {
 		r.log.Err(err).Msg("Ошибка при получения вакансий с Базы vacancy.repository.GetAll()")
 		return nil, err

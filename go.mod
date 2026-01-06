@@ -10,6 +10,7 @@ require (
 	github.com/jackc/pgx/v5 v5.8.0
 	github.com/joho/godotenv v1.5.1
 	github.com/rs/zerolog v1.34.0
+	github.com/rvflash/elapsed v0.4.1
 )
 
 require (
@@ -34,7 +35,6 @@ require (
 	github.com/natefinch/atomic v1.0.1 // indirect
 	github.com/onsi/ginkgo v1.16.5 // indirect
 	github.com/onsi/gomega v1.38.3 // indirect
-	github.com/rvflash/elapsed v0.4.1 // indirect
 	github.com/serenize/snaker v0.0.0-20201027110005-a7ad2135616e // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.68.0 // indirect

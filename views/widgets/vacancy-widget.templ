@@ -6,7 +6,7 @@ import (
 	"go-fiber/views/components"
 )
 
-templ VacancyWidget(vacancies []vacancy.Vacancy) {
+templ VacancyWidget(vacancies []vacancy.Vacancy, pagesCount, currentPage int) {
 	@vacancyWidgetCSS()
 	<div class="vacancy_block__content">
 		<div class="vacancy_block">
@@ -26,16 +26,76 @@ templ VacancyWidget(vacancies []vacancy.Vacancy) {
 				})
 			}
 		</div>
+		<div class="pagination">
+			<div class="pagenation__prev">
+				if currentPage != 1 {
+					<img src="/public/icons/arrow-left.svg" alt="arrow-left"/>
+					<a href={ "/?page=" + fmt.Sprintf("%d", currentPage-1) }>Предыдущая</a>
+				}
+			</div>
+			<div class="pagenation__next">
+				if currentPage < pagesCount {
+					<a href={ "/?page=" + fmt.Sprintf("%d", currentPage+1) }>Следующая</a>
+					<img src="/public/icons/arrow-right.svg" alt="arrow-right"/>
+				}
+			</div>
+		</div>
 	</div>
 }
 
 templ vacancyWidgetCSS() {
 	<style>
+	.pagination a {
+		padding-top: 3px;
+		color: #333;
+		font-size: 18px;
+		text-decoration: none;
+		font-weight: 500;
+	}
+
+	.pagination img {
+		width: 26px;
+		height: 26px;
+	}
+
+	.pagination a:hover {
+		color: #007bff;
+	}
+
+	.pagenation__prev {
+		display: flex;
+		align-content: center;
+		flex-direction: row;
+		justify-content: flex-start;
+		gap: 10px;
+		padding: 10px;
+	}
+
+	.pagenation__next {
+    	display: flex;
+    	align-content: center;
+    	flex-direction: row;
+    	justify-content: flex-start;
+    	gap: 10px;
+    	padding: 10px;
+	}
+
+	.pagination {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		gap: 10px;
+		width: 100%;
+		padding: 20px;
+	}
 	.vacancy_block__content {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-
+		max-width: 1390px;
+		width: 100%;
+		margin: 0 auto;
 	}
 
 	.vacancy_block {
